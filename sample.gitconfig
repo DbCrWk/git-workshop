@@ -1,0 +1,189 @@
+[user]
+	name = git user                        # a real name
+	email = user@git                       # a real email
+	signingkey = 43SDAFJSDFJ2345934        # fun gpg stuff
+
+[core]
+	editor = atom --wait                   # the editor you prefer
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol, space-before-tab
+                                           # tbh, no idea what this does
+	excludesfile = ~/.gitignore            # if you want a default gitignore
+
+[web]
+	browser = safari                       # browser of choice
+
+[rerere]                                   # git magic
+	enabled = 1
+	autoupdate = 1
+
+[push]
+	default = simple                       # so you don't mess thing up
+
+[color]                                    # idk what this does
+	ui = auto
+
+[help]                                     # more git magic
+    autocorrect = 1
+
+[color "branch"]                           # to make things look pretty
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+
+[color "diff"]                             # more pretty things
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[color "status"]                           # all the pretty things
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+
+[alias]                                    # my aliases!!!
+	############# aliases to manage and search aliases
+	al = "!git config -l | grep alias | cut -c 7-"
+    als = "!f() { git config -l | grep \"alias\\..*$1\" | cut -c 7-; }; f"
+    alsa = "!f() { git config -l | grep \"alias\\.[^=]*$1=\" | cut -c 7-; }; f"
+    alsb = "!f() { git config -l | grep \"alias\\.[^=]*=.*$1.*\" | cut -c 7-; }; f"
+    alsc = "!f() { git config -l | grep \"alias\\.[^=]*=[^ ]*$1[^ ]* .*\" | cut -c 7-; }; f"
+    ############# helpful ways to add things
+	a = add --all                          # adds everything
+	ai = add -i                            # interactive adding (i don't really use this)
+	ap = add -p                            # very useful, let's you choose what to add
+    #############
+    ama = am --abort                       # weird git magic
+    amr = am --resolved
+    ams = am --skip
+	#############
+	apl = apply                            # more weird git magix
+	apls = apply --stat
+	aplc = apply --check
+	############# tell git to pretend certain things when pushing and pulling
+    asm = update-index --assume-unchanged
+    assume = "!git asm"
+    uasm = update-index --no-assume-unchanged
+    unassume = "!git uasm"
+    asma = "!git st -s | awk {'print $2'} | xargs git assume"
+    assumeall = "!git asma"
+    uasma = "!git assumed | xargs git update-index --no-assume-unchanged"
+    unassumeall = "!git uasma"
+	############# helpful branch things
+	b = branch
+	ba = branch -a
+	bd = branch -d
+	br = branch -r
+	############# for when you mess up and need to find out where
+    bi = bisect start
+    big = bisect good
+    bib = bisect bad
+    bir = bisect reset
+	############# commits stuff!
+	c = commit
+	ca = commit -a
+	cm = commit -m
+	cam = commit -am
+	can = commit --amend
+    oops = commit --amend -m
+	############# secure commit stuff!
+	cs = commit -S
+	csa = commit -a S
+	csm = commit -S -m
+	csam = commit -S -am
+	csan = commit -S --amend
+	oopss = commit -S --amend -m
+	############# to only pick certain changes for moving changes
+	cp = cherry-pick
+	############# to see what has been changed
+	d = diff
+    dr = diff --cached HEAD^
+	############# to get changes
+	f = fetch
+	fo = fetch origin
+	fu = fetch upstream
+	############# fancy git stuff
+	fp = format-patch
+	############# searching through git
+	g = grep
+    gf = grep --show-function
+    gi = grep -Ii
+    ############# different types of logs, useful in different situations
+    l = log --pretty=oneline --abbrev-commit --graph --decorate --date=relative
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ld = "!git ll -1"
+    lo = log --pretty=oneline --abbrev-commit
+    lv = log --color --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue) <%an>%Creset'
+    ls = log --stat
+    lp = log -p
+    lf = log --stat -u
+    la = log --author
+    lm = log --grep
+	############# finding files
+	lsf = ls-files
+	find = "!git ls-files | grep -i"
+	############# merging
+	m = merge
+	ma = merge --abort
+	mc = merge --continue
+	ms = merge --skip
+	############# checking stuff out
+	co = checkout
+	cob = checkout -b
+	############# get rid of old junk
+	pr = prune -v
+	############# pushing!
+	ps = push
+	psf = push -f # never use this
+	psu = push -u
+	pso = push origin
+	psao = push --all origin
+	psfo = push -f origin # or this
+	psuo = push -u origin
+	psom = push origin master
+	############# pulling!
+	pl = pull
+	plu = pull -u
+	plo = pull origin
+	plp = pull upstream
+	plom = pull origin master
+	############# fancier pulling!
+	pb = pull --rebase
+	pbo = pull --rebase origin
+	pbp = pull --rebase upstream
+	pbom = pull --rebase origin master
+	pbpm = pull --rebase upstream master
+	############# helpful ways to manage a rebase
+	rb = rebase
+	rba = rebase --abort
+	rbc = rebase --continue
+	rbi = rebase --interactive
+	rbs = rebase --skip
+	############# for when you messed up
+	re = reset
+	rh = reset HEAD
+	reh = reset --hard
+	res = reset --soft
+	rehh = reset --hard HEAD
+	resh = reset --soft HEAD
+	############# to manage remotes
+	r = remote
+	ra = remote add
+	rr = remote rm
+	rv = remote -v
+	rm = remote rename
+	rs = remote show
+	rao = remote add origin
+	rso = remote show origin
+	############# see what's up
+	s = status
+	sb = status -s -b
+
+##### fun crypto stuff
+
+[gpg]
+	program = gpg2
+
+[commit]
+	gpgsign = true
