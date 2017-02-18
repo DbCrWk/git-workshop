@@ -1,2 +1,2 @@
 # HackDuke `git` workshop
-[@DbCrWk](@DbCrkWk) [@jiaweizhang](@jiaweizhang)
+[@DbCrWk](@DbCrkWk) [@jiaweizhang](@jiaweizhang) whoops!
